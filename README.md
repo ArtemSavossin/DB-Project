@@ -17,6 +17,6 @@
 
 TODO - подробное описание всех сущностей и связей?
 
-![model](/ESM.jpg)
+![model](/ESM-ER-2.jpg)
 
 ![model](/ESM-TR.jpeg)
