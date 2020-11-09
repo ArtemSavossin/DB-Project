@@ -19,4 +19,4 @@ TODO - подробное описание всех сущностей и свя
 
 ![model](/ESM-ER-2.jpg)
 
-![model](/ESM-TR.jpeg)
+![model](/ESM-TR.jpg)
