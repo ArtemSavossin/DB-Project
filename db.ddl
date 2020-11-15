@@ -1,5 +1,7 @@
 CREATE DATABASE ESM;
 
+USE ESM;
+
 CREATE TABLE Managers (
     id_Manager INT PRIMARY KEY,
     name VARCHAR(50),
@@ -23,7 +25,7 @@ CREATE TABLE Oders (
     created_time DATETIME,
     payment_time DATETIME,
     total_cost INT,
-    is_Finished BIT,
+    is_Finished BOOL,
     FOREIGN KEY (id_customer) REFERENCES Customers(id_customer),
     FOREIGN KEY (id_manager) REFERENCES Managers(id_manager)
 );
