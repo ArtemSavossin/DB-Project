@@ -20,12 +20,15 @@ CREATE TABLE Customers (
     email VARCHAR(100)
 );
 
-CREATE TABLE Oders (
+
+CREATE TABLE Orders (
     id_order INT PRIMARY KEY,
     created_time DATETIME,
     payment_time DATETIME,
     total_cost INT,
-    is_Finished BOOL,
+    is_Finished BIT,
+    id_customer INT,
+    id_manager INT,
     FOREIGN KEY (id_customer) REFERENCES Customers(id_customer),
     FOREIGN KEY (id_manager) REFERENCES Managers(id_manager)
 );
@@ -34,6 +37,7 @@ CREATE TABLE Items (
     id_item INT PRIMARY KEY,
     cost INT,
     code VARCHAR(100),
+    id_Manager INT,
     FOREIGN KEY (id_Manager) REFERENCES Managers(id_manager)
 );
 
@@ -43,6 +47,7 @@ CREATE TABLE Yarn (
     material VARCHAR(50),
     color VARCHAR(50),
     length_m FLOAT,
+	id_item INT,
     FOREIGN KEY (id_item) REFERENCES Items(id_item)
 );
 
@@ -50,6 +55,7 @@ CREATE TABLE Goods (
     id_good INT PRIMARY KEY,
     name VARCHAR(50),
     description VARCHAR(2000),
+    id_item INT,
     FOREIGN KEY (id_item) REFERENCES Items(id_item)
 );
 
@@ -63,12 +69,16 @@ CREATE TABLE Storages (
 
 CREATE TABLE Storage_item (
     amount INT,
+    id_storage INT,
+    id_item INT,
     FOREIGN KEY (id_storage) REFERENCES Storages(id_storage),
     FOREIGN KEY (id_item) REFERENCES Items(id_item)
 );
 
 CREATE TABLE Order_item (
     amount INT,
+    id_order INT,
+    id_item INT,
     FOREIGN KEY (id_order) REFERENCES Orders(id_order),
     FOREIGN KEY (id_item) REFERENCES Items(id_item)
 );
