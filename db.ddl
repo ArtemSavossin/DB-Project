@@ -15,7 +15,7 @@ CREATE TABLE Customers (
     phone_number INT,
     city VARCHAR(50),
     street VARCHAR(50),
-    email VARCHAR(100),
+    email VARCHAR(100)
 );
 
 CREATE TABLE Oders (
@@ -56,7 +56,7 @@ CREATE TABLE Storages (
     city VARCHAR(100),
     street VARCHAR(100),
     capacity INT,
-    avialable_place INT,
+    avialable_place INT
 );
 
 CREATE TABLE Storage_item (
