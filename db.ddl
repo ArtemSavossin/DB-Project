@@ -12,7 +12,7 @@ CREATE TABLE Managers (
 
 CREATE TABLE Customers (
     id_customer INT PRIMARY KEY,
-    name VARCHAR(50),
+    FirstName VARCHAR(50),
     Surname VARCHAR(50),
     phone_number INT,
     city VARCHAR(50),
@@ -36,7 +36,7 @@ CREATE TABLE Orders (
 CREATE TABLE Items (
     id_item INT PRIMARY KEY,
     cost INT,
-    code VARCHAR(100),
+    articul VARCHAR(100),
     id_Manager INT,
     FOREIGN KEY (id_Manager) REFERENCES Managers(id_manager)
 );
@@ -53,8 +53,8 @@ CREATE TABLE Yarn (
 
 CREATE TABLE Goods (
     id_good INT PRIMARY KEY,
-    name VARCHAR(50),
-    description VARCHAR(2000),
+    goodsName VARCHAR(50),
+    textDescript VARCHAR(2000),
     id_item INT,
     FOREIGN KEY (id_item) REFERENCES Items(id_item)
 );
