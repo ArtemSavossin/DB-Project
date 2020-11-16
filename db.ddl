@@ -7,7 +7,7 @@ CREATE TABLE Managers (
     id_Manager INT PRIMARY KEY AUTO_INCREMENT,
     FirstName VARCHAR(50),
     Surname VARCHAR(50),
-    phone_number INT NOT NULL UNIQUE,
+    phone_number VARCHAR(50) NOT NULL UNIQUE,
     orders_closed INT
 );
 
@@ -15,7 +15,7 @@ CREATE TABLE Customers (
     id_customer INT PRIMARY KEY AUTO_INCREMENT,
     FirstName VARCHAR(50),
     Surname VARCHAR(50),
-    phone_number INT NOT NULL UNIQUE,
+    phone_number VARCHAR(50) NOT NULL UNIQUE,
     city VARCHAR(50),
     street VARCHAR(50),
     email VARCHAR(100) UNIQUE
@@ -70,14 +70,14 @@ CREATE TABLE Storages (
 
 CREATE TABLE Storage_item (
     amount INT,
-    id_storage INT,
-    id_item INT,
+    id_storage INT NOT NULL,
+    id_item INT NOT NULL,
     FOREIGN KEY (id_storage) REFERENCES Storages(id_storage),
     FOREIGN KEY (id_item) REFERENCES Items(id_item)
 );
 
 CREATE TABLE Order_item (
-    amount INT,
+    amount INT DEFAULT 1,
     id_order INT,
     id_item INT,
     FOREIGN KEY (id_order) REFERENCES Orders(id_order),
