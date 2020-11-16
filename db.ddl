@@ -24,8 +24,8 @@ CREATE TABLE Customers (
 
 CREATE TABLE Orders (
     id_order INT PRIMARY KEY AUTO_INCREMENT,
-    created_time DATETIME,
-    payment_time DATETIME,
+    created_time TIMESTAMP,
+    payment_time TIMESTAMP,
     total_cost INT,
     is_Finished BIT,
     id_customer INT,
