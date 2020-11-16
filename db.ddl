@@ -4,7 +4,7 @@ USE ESM;
 
 CREATE TABLE Managers (
     id_Manager INT PRIMARY KEY,
-    name VARCHAR(50),
+    FirstName VARCHAR(50),
     Surname VARCHAR(50),
     phone_number INT,
     orders_closed INT
