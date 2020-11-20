@@ -1,85 +1,82 @@
-
-CREATE DATABASE ESM;
-
-USE ESM;
+/*FOR SQLite*/
 
 CREATE TABLE Managers (
-    id_Manager INT PRIMARY KEY AUTO_INCREMENT,
-    FirstName VARCHAR(50),
-    Surname VARCHAR(50),
-    phone_number VARCHAR(50) NOT NULL UNIQUE,
-    orders_closed INT
+    id_Manager INTEGER PRIMARY KEY AUTOINCREMENT,
+    FirstName TEXT,
+    Surname TEXT,
+    phone_number TEXT NOT NULL UNIQUE,
+    orders_closed INTEGER
 );
 
 CREATE TABLE Customers (
-    id_customer INT PRIMARY KEY AUTO_INCREMENT,
-    FirstName VARCHAR(50),
-    Surname VARCHAR(50),
-    phone_number VARCHAR(50) NOT NULL UNIQUE,
-    city VARCHAR(50),
-    street VARCHAR(50),
-    email VARCHAR(100) UNIQUE
+    id_customer INTEGER PRIMARY KEY AUTOINCREMENT ,
+    FirstName TEXT,
+    Surname TEXT,
+    phone_number TEXT NOT NULL UNIQUE,
+    city TEXT,
+    street TEXT,
+    email TEXT UNIQUE
 );
 
 
 CREATE TABLE Orders (
-    id_order INT PRIMARY KEY AUTO_INCREMENT,
-    created_time TIMESTAMP,
-    payment_time TIMESTAMP,
-    total_cost INT,
-    is_Finished BIT,
-    id_customer INT,
-    id_manager INT,
+    id_order INTEGER PRIMARY KEY AUTOINCREMENT ,
+    created_time TEXT,
+    payment_time TEXT,
+    total_cost INTEGER,
+    is_Finished INTEGER,
+    id_customer INTEGER,
+    id_manager INTEGER,
     FOREIGN KEY (id_customer) REFERENCES Customers(id_customer) ON DELETE RESTRICT,
     FOREIGN KEY (id_manager) REFERENCES Managers(id_manager) ON DELETE RESTRICT
 );
 
 CREATE TABLE Items (
-    id_item INT PRIMARY KEY AUTO_INCREMENT,
-    cost INT,
-    articul VARCHAR(100),
-    id_Manager INT,
+    id_item INTEGER PRIMARY KEY AUTOINCREMENT,
+    cost INTEGER,
+    articul TEXT,
+    id_Manager INTEGER,
     FOREIGN KEY (id_Manager) REFERENCES Managers(id_manager) ON DELETE RESTRICT
 );
 
 
 CREATE TABLE Yarn (
-    id_yarn INT PRIMARY KEY AUTO_INCREMENT,
-    material VARCHAR(50),
-    color VARCHAR(50),
-    length_m FLOAT,
-	id_item INT,
+    id_yarn INTEGER PRIMARY KEY AUTOINCREMENT,
+    material TEXT,
+    color TEXT,
+    length_m REAL,
+	id_item INTEGER,
     FOREIGN KEY (id_item) REFERENCES Items(id_item) ON DELETE RESTRICT
 );
 
 CREATE TABLE Goods (
-    id_good INT PRIMARY KEY AUTO_INCREMENT,
-    goodName VARCHAR(50),
-    textDescript VARCHAR(2000),
-    id_item INT,
+    id_good INTEGER PRIMARY KEY AUTOINCREMENT ,
+    goodName TEXT,
+    textDescript TEXT,
+    id_item INTEGER,
     FOREIGN KEY (id_item) REFERENCES Items(id_item) ON DELETE RESTRICT
 );
 
 CREATE TABLE Storages (
-    id_storage INT PRIMARY KEY AUTO_INCREMENT,
-    city VARCHAR(100),
-    street VARCHAR(100),
-    capacity INT,
-    avialable_place INT
+    id_storage INTEGER PRIMARY KEY AUTOINCREMENT,
+    city TEXT,
+    street TEXT,
+    capacity INTEGER,
+    avialable_place INTEGER
 );
 
 CREATE TABLE Storage_item (
-    amount INT,
-    id_storage INT NOT NULL,
-    id_item INT NOT NULL,
+    amount INTEGER,
+    id_storage INTEGER NOT NULL,
+    id_item INTEGER NOT NULL,
     FOREIGN KEY (id_storage) REFERENCES Storages(id_storage),
     FOREIGN KEY (id_item) REFERENCES Items(id_item)
 );
 
 CREATE TABLE Order_item (
-    amount INT DEFAULT 1,
-    id_order INT,
-    id_item INT,
+    amount INTEGER DEFAULT 1,
+    id_order INTEGER,
+    id_item INTEGER,
     FOREIGN KEY (id_order) REFERENCES Orders(id_order),
     FOREIGN KEY (id_item) REFERENCES Items(id_item)
 );
