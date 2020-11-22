@@ -101,3 +101,41 @@ CREATE TRIGGER storage_place_count_del
   FOR EACH ROW
   EXECUTE PROCEDURE storage_place_count_del_trg();
   
+CREATE OR REPLACE FUNCTION check_available_place_trg()
+RETURNS trigger AS
+$$
+BEGIN
+   IF (SELECT avialable_place FROM storages WHERE id_storage = NEW.id_storage) - NEW.amount < 0 
+   THEN
+      RAISE EXCEPTION 'No place for such amount';
+   END IF;
+   RETURN NEW;
+END;
+$$
+LANGUAGE 'plpgsql';
+
+CREATE TRIGGER check_available_place
+  BEFORE INSERT
+  ON "storage_item"
+  FOR EACH ROW
+  EXECUTE PROCEDURE check_available_place_trg();
+  
+
+CREATE OR REPLACE FUNCTION check_available_place_upd_trg()
+RETURNS trigger AS
+$$
+BEGIN
+   IF (SELECT avialable_place FROM storages WHERE id_storage = NEW.id_storage) - NEW.amount < 0 
+   THEN
+      RAISE EXCEPTION 'No place for such amount';
+   END IF;
+   RETURN NEW;
+END;
+$$
+LANGUAGE 'plpgsql';
+
+CREATE TRIGGER check_available_place_upd
+  BEFORE UPDATE
+  ON "storage_item"
+  FOR EACH ROW
+  EXECUTE PROCEDURE check_available_place_upd_trg();
