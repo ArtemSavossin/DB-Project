@@ -1,7 +1,7 @@
-/*FOR SQLite*/
-
+--for postgres
+-- DROP DATABASE "ESM";
 CREATE TABLE Managers (
-    id_Manager INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_Manager SERIAL PRIMARY KEY,
     FirstName TEXT,
     Surname TEXT,
     phone_number TEXT NOT NULL UNIQUE,
@@ -9,7 +9,7 @@ CREATE TABLE Managers (
 );
 
 CREATE TABLE Customers (
-    id_customer INTEGER PRIMARY KEY AUTOINCREMENT ,
+    id_customer SERIAL PRIMARY KEY,
     FirstName TEXT,
     Surname TEXT,
     phone_number TEXT NOT NULL UNIQUE,
@@ -20,9 +20,9 @@ CREATE TABLE Customers (
 
 
 CREATE TABLE Orders (
-    id_order INTEGER PRIMARY KEY AUTOINCREMENT ,
-    created_time TEXT,
-    payment_time TEXT,
+    id_order SERIAL PRIMARY KEY,
+    created_time timestamp,
+    payment_time timestamp,
     total_cost INTEGER,
     is_Finished INTEGER,
     id_customer INTEGER,
@@ -32,7 +32,7 @@ CREATE TABLE Orders (
 );
 
 CREATE TABLE Items (
-    id_item INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_item SERIAL PRIMARY KEY,
     cost INTEGER,
     articul TEXT,
     id_Manager INTEGER,
@@ -41,7 +41,7 @@ CREATE TABLE Items (
 
 
 CREATE TABLE Yarn (
-    id_yarn INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_yarn SERIAL PRIMARY KEY,
     material TEXT,
     color TEXT,
     length_m REAL,
@@ -50,7 +50,7 @@ CREATE TABLE Yarn (
 );
 
 CREATE TABLE Goods (
-    id_good INTEGER PRIMARY KEY AUTOINCREMENT ,
+    id_good SERIAL PRIMARY KEY,
     goodName TEXT,
     textDescript TEXT,
     id_item INTEGER,
@@ -58,7 +58,7 @@ CREATE TABLE Goods (
 );
 
 CREATE TABLE Storages (
-    id_storage INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_storage SERIAL PRIMARY KEY,
     city TEXT,
     street TEXT,
     capacity INTEGER,
