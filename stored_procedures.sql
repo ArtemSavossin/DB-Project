@@ -2,14 +2,14 @@ CREATE OR REPLACE FUNCTION get_order_items (ind INT)
     RETURNS TABLE (
         articul TEXT,
         amount INT,
-		total_cost INT
+	total_cost INT
 )
 AS $$
 BEGIN
     RETURN QUERY SELECT
         items.articul,
         order_item.amount,
-		order_item.amount * items.cost AS total_cost
+	order_item.amount * items.cost AS total_cost
     FROM
         orders JOIN order_item ON order_item.id_order = orders.id_order JOIN items ON order_item.id_item = items.id_item
     WHERE
