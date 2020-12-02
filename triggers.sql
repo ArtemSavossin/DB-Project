@@ -139,3 +139,41 @@ CREATE TRIGGER check_available_place_upd
   ON "storage_item"
   FOR EACH ROW
   EXECUTE PROCEDURE check_available_place_upd_trg();
+
+CREATE OR REPLACE FUNCTION check_available_amount_trg()
+RETURNS trigger AS
+$$
+BEGIN
+   IF (count_item_everywhere(NEW.id_item)) - NEW.amount < 0 
+   THEN
+      RAISE EXCEPTION 'Not enough items in storages';
+   END IF;
+   RETURN NEW;
+END;
+$$
+LANGUAGE 'plpgsql';
+
+CREATE TRIGGER check_available_amount
+  BEFORE INSERT
+  ON "order_item"
+  FOR EACH ROW
+  EXECUTE PROCEDURE check_available_amount_trg();
+
+CREATE OR REPLACE FUNCTION check_available_amount_upd_trg()
+RETURNS trigger AS
+$$
+BEGIN
+   IF (count_item_everywhere(NEW.id_item)) - NEW.amount < 0 
+   THEN
+      RAISE EXCEPTION 'Not enough items in storages';
+   END IF;
+   RETURN NEW;
+END;
+$$
+LANGUAGE 'plpgsql';
+
+CREATE TRIGGER check_available_amount_upd
+  BEFORE UPDATE
+  ON "order_item"
+  FOR EACH ROW
+  EXECUTE PROCEDURE check_available_amount_upd_trg();
