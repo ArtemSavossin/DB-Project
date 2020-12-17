@@ -49,3 +49,34 @@ BEGIN
 END; $$ 
 
 LANGUAGE 'plpgsql'
+
+CREATE OR REPLACE FUNCTION items_sold_by_manager () 
+    RETURNS TABLE (
+        surname TEXT,
+        amount bigint
+)
+AS $$
+BEGIN
+    RETURN QUERY 
+	SELECT managers.surname as surname, SUM(order_item.amount) as amount FROM managers
+	JOIN items ON managers.id_manager = items.id_manager
+	JOIN order_item ON items.id_item = order_item.id_item
+	GROUP BY managers.surname;
+END; $$ 
+
+LANGUAGE 'plpgsql';
+
+CREATE OR REPLACE FUNCTION items_sold () 
+    RETURNS TABLE (
+        surname TEXT,
+        amount bigint
+)
+AS $$
+BEGIN
+    RETURN QUERY 
+	SELECT items.articul, SUM(order_item.amount) FROM items
+	JOIN order_item ON items.id_item = order_item.id_item
+	GROUP BY items.articul;
+END; $$ 
+
+LANGUAGE 'plpgsql';
